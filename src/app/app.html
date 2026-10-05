@@ -1,0 +1,473 @@
+<div class="app-wrapper">
+
+  <!-- ==================== ЭКРАН 1: ОСНОВНОЙ ЛЕНДИНГ ==================== -->
+  <ng-container *ngIf="!showChat()">
+    <!-- Навбар -->
+    <header class="navbar">
+      <div class="container nav-container">
+        <a href="#" class="brand">
+          <div class="brand-icon">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M4 18C4 18 8 16 12 12C16 8 20 6 20 6C20 6 18 10 14 14C10 18 4 18 4 18Z" fill="currentColor"/>
+              <path d="M12 12L4 20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="brand-text">
+            <span class="brand-title">Skill to Income</span>
+            <span class="brand-subtitle">Дағдыларың — табысың</span>
+          </div>
+        </a>
+
+        <nav class="nav-links">
+          <a *ngFor="let link of navLinks" [href]="link.href" [class.active]="link.active">
+            {{ link.label }}
+          </a>
+        </nav>
+
+        <div class="nav-actions">
+          <div class="lang-selector" (click)="toggleLangMenu()">
+            <span>{{ selectedLang() }}</span>
+            <svg class="chevron" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
+            </svg>
+            <div class="lang-dropdown" *ngIf="isLangMenuOpen()">
+              <div class="lang-item" (click)="setLang('Қазақша'); $event.stopPropagation()">Қазақша</div>
+              <div class="lang-item" (click)="setLang('Русский'); $event.stopPropagation()">Русский</div>
+              <div class="lang-item" (click)="setLang('English'); $event.stopPropagation()">English</div>
+            </div>
+          </div>
+
+          <button class="btn btn-primary btn-sm" (click)="openChat()">Кіру / Тіркелу</button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="container hero-grid">
+        <!-- Текст слева -->
+        <div class="hero-left">
+          <div class="badge-pill">AI негізіндегі платформа</div>
+          <h1 class="hero-title">Дағдыларыңды табысқа айналдыр</h1>
+          <p class="hero-description">
+            Skill to Income – бұл сенің дағдыларыңды талдап, оларды нарықтағы нақты мүмкіндіктермен ұштастыратын және табыс табуға арналған AI-платформа.
+          </p>
+
+          <div class="hero-cta-group">
+            <button class="btn btn-primary btn-lg" (click)="openChat()">
+              <span>Қазір бастау</span>
+              <svg viewBox="0 0 20 20" fill="currentColor" class="arrow-icon">
+                <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+              </svg>
+            </button>
+            
+            <a href="#how-it-works" class="btn btn-outline btn-lg">
+              <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M8 5v14l11-7z"/>
+              </svg>
+              <span>Қалай жұмыс істейді?</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Иллюстрация и карточки справа -->
+        <div class="hero-right">
+          <div class="hero-visual-card">
+            <div class="leaf-decor leaf-left"></div>
+
+            <div class="user-greeting-pill">
+              <div class="avatar-circle">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+              </div>
+              <div>
+                <div class="greeting-name">Сәлем !</div>
+                <div class="greeting-subtitle">Сенің дағдыларың – жаңа мүмкіндіктерге жетелейді</div>
+              </div>
+            </div>
+
+            <div class="skills-tag-block">
+              <div class="tag-label">Сенің дағдыларың:</div>
+              <div class="tags-row">
+                <span class="skill-tag">Математика</span>
+                <span class="skill-tag">Аналитика</span>
+                <span class="skill-tag">Жобалар</span>
+                <span class="skill-tag">Коммуникация</span>
+              </div>
+            </div>
+
+            <!-- Векторный персонаж -->
+            <div class="person-container">
+              <div class="person-avatar">
+                <svg viewBox="0 0 300 240" class="person-svg">
+                  <defs>
+                    <linearGradient id="hoodieGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stop-color="#0f453d" />
+                      <stop offset="100%" stop-color="#092823" />
+                    </linearGradient>
+                  </defs>
+                  <path d="M80,240 C80,180 110,150 150,150 C190,150 220,180 220,240 Z" fill="url(#hoodieGrad)"/>
+                  <path d="M125,140 C125,120 175,120 175,140 Z" fill="#e2b998"/>
+                  <circle cx="150" cy="105" r="32" fill="#f5cfab"/>
+                  <path d="M120,95 C120,60 180,60 180,95 C175,70 125,70 120,95 Z" fill="#2d2a29"/>
+                  <circle cx="130" cy="80" r="14" fill="#2d2a29"/>
+                  <circle cx="150" cy="70" r="15" fill="#2d2a29"/>
+                  <circle cx="170" cy="80" r="14" fill="#2d2a29"/>
+                  <rect x="180" y="145" width="110" height="75" rx="7" fill="#1e293b" />
+                  <rect x="185" y="150" width="100" height="65" rx="4" fill="#334155" />
+                  <circle cx="235" cy="182" r="5" fill="#94a3b8" />
+                </svg>
+              </div>
+            </div>
+
+            <!-- Плавающая карточка графика (Слева) -->
+            <div class="floating-card chart-card">
+              <span class="card-caption">Табыс мүмкіндігі</span>
+              <div class="chart-bars">
+                <div class="bar" style="height: 35%"></div>
+                <div class="bar" style="height: 55%"></div>
+                <div class="bar" style="height: 75%"></div>
+                <div class="bar" style="height: 95%"></div>
+                <div class="bar" style="height: 80%"></div>
+              </div>
+            </div>
+
+            <!-- Плавающая карточка рекомендаций (Справа) -->
+            <div class="floating-card recommendations-card" (click)="openChat()">
+              <div class="rec-title">Жеке ұсыныстар</div>
+              <div class="rec-item">
+                <div class="rec-icon green">
+                  <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4 4a2 2 0 012-2h8a2 2 0 012 2v12a1 1 0 110 2h-3a1 1 0 01-1-1v-2a1 1 0 00-1-1H9a1 1 0 00-1 1v2a1 1 0 01-1 1H4a1 1 0 110-2V4zm3 1h2v2H7V5zm2 4H7v2h2V9zm2-4h2v2h-2V5zm2 4h-2v2h2V9z" clip-rule="evenodd"/></svg>
+                </div>
+                <div class="rec-text">
+                  <div class="rec-name">Фриланс жобалары</div>
+                  <div class="rec-desc">Бастапқы деңгей • 3-6 ай</div>
+                </div>
+                <span class="rec-arrow">›</span>
+              </div>
+
+              <div class="rec-item">
+                <div class="rec-icon teal">
+                  <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a10.912 10.912 0 01.352 1.948l-.72.36a1 1 0 00-.532.89v4.5a1 1 0 00.532.89l5 2.5a1 1 0 00.936 0l5-2.5a1 1 0 00.532-.89v-4.5a1 1 0 00-.532-.89l-.72-.36a10.908 10.908 0 01.352-1.948l2.644-1.131a1 1 0 000-1.84l-7-3z"/></svg>
+                </div>
+                <div class="rec-text">
+                  <div class="rec-name">Онлайн курстар</div>
+                  <div class="rec-desc">Дағдыңды арттыр</div>
+                </div>
+                <span class="rec-arrow">›</span>
+              </div>
+
+              <div class="rec-item">
+                <div class="rec-icon yellow">
+                  <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z" clip-rule="evenodd"/></svg>
+                </div>
+                <div class="rec-text">
+                  <div class="rec-name">Жұмысқа орналасасу</div>
+                  <div class="rec-desc">Нақты вакансиялар</div>
+                </div>
+                <span class="rec-arrow">›</span>
+              </div>
+            </div>
+
+            <!-- Надпись со стрелочкой -->
+            <div class="handwritten-note">
+              <span>Арманыңды жоспарға айналдыр!</span>
+              <svg class="hand-arrow" viewBox="0 0 100 80" fill="none">
+                <path d="M70,10 C45,15 15,35 25,65" stroke="#16655c" stroke-width="2.5" stroke-dasharray="4,4" fill="none" stroke-linecap="round"/>
+                <path d="M18,52 L25,66 L38,60" stroke="#16655c" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4 колонки преимуществ -->
+    <section class="features-section" id="features">
+      <div class="container features-grid">
+        <div class="feature-col" *ngFor="let item of features">
+          <div class="feature-icon-wrapper">
+            <svg *ngIf="item.icon === 'search'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+              <circle cx="11" cy="11" r="7"/>
+              <path d="M21 21l-4.35-4.35"/>
+              <path d="M11 8v6M8 11h6"/>
+            </svg>
+            <svg *ngIf="item.icon === 'target'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+              <circle cx="12" cy="12" r="9"/>
+              <circle cx="12" cy="12" r="5"/>
+              <circle cx="12" cy="12" r="1" fill="currentColor"/>
+            </svg>
+            <svg *ngIf="item.icon === 'doc'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14 2 14 8 20 8"/>
+              <line x1="16" y1="13" x2="8" y2="13"/>
+              <line x1="16" y1="17" x2="8" y2="17"/>
+              <line x1="10" y1="9" x2="8" y2="9"/>
+            </svg>
+            <svg *ngIf="item.icon === 'rocket'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+              <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/>
+              <path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/>
+            </svg>
+          </div>
+          <h3 class="feature-title">{{ item.title }}</h3>
+          <p class="feature-desc">{{ item.desc }}</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Секция: Қалай жұмыс істейді? -->
+    <section class="how-it-works-section" id="how-it-works">
+      <div class="container">
+        <h2 class="section-title">Қалай жұмыс істейді?</h2>
+
+        <div class="how-grid">
+          <div class="steps-column">
+            <div 
+              class="step-card" 
+              *ngFor="let step of steps"
+              [class.active]="activeStep() === step.id"
+              (click)="setStep(step.id)">
+              <div class="step-num">{{ step.id }}</div>
+              <div class="step-info">
+                <h4 class="step-heading">{{ step.title }}</h4>
+                <p class="step-sub">{{ step.desc }}</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Мокапы устройств -->
+          <div class="mockups-column">
+            <!-- Ноутбук -->
+            <div class="laptop-shell">
+              <div class="laptop-screen">
+                <div class="dashboard-preview">
+                  <div class="dash-sidebar">
+                    <div class="dash-brand">
+                      <span class="logo-dot"></span> Skill to Income
+                    </div>
+                    <div class="dash-nav-item active">Басты бет</div>
+                    <div class="dash-nav-item">Дағдылар</div>
+                    <div class="dash-nav-item">Мүмкіндіктер</div>
+                    <div class="dash-nav-item">Жоспар</div>
+                    <div class="dash-nav-item">Профиль</div>
+                  </div>
+
+                  <div class="dash-main">
+                    <div class="dash-header-section">
+                      <span class="dash-subtitle">Сенің дағдыларың</span>
+                      <div class="mini-tags">
+                        <span>Математика</span>
+                        <span>Аналитика</span>
+                        <span>Коммуникация</span>
+                        <span>Жобалау</span>
+                      </div>
+                    </div>
+
+                    <div class="dash-cards-grid">
+                      <span class="section-badge-text">Ұсынылатын бағыттар</span>
+                      <div class="sub-cards-row">
+                        <div class="inner-card">
+                          <div class="card-lead-icon green">📊</div>
+                          <h5>Data Analyst</h5>
+                          <p>Фриланс • 3-6 ай</p>
+                          <button class="mini-card-btn" (click)="openChat()">Курстар</button>
+                        </div>
+                        <div class="inner-card">
+                          <div class="card-lead-icon teal">🤖</div>
+                          <h5>AI ассистент</h5>
+                          <p>Онлайн • 1-3 ай</p>
+                          <button class="mini-card-btn" (click)="openChat()">Курстар</button>
+                        </div>
+                        <div class="inner-card">
+                          <div class="card-lead-icon yellow">✍️</div>
+                          <h5>Контент жасау</h5>
+                          <p>Фриланс • 1-4 ай</p>
+                          <button class="mini-card-btn" (click)="openChat()">Курстар</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="laptop-base"></div>
+            </div>
+
+            <!-- Смартфон -->
+            <div class="phone-shell">
+              <div class="phone-screen">
+                <div class="phone-notch"></div>
+                <div class="phone-title">Алғашқы табыс</div>
+                <div class="success-icon-wrap">
+                  <svg class="check-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                    <polyline points="20 6 9 17 4 12"/>
+                  </svg>
+                </div>
+                <div class="phone-msg">Сенің алғашқы тапсырысыңа сәттілік!</div>
+                <button class="phone-action-btn" (click)="openChat()">Бастау</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Нижняя плашка со статистикой -->
+    <section class="stats-banner">
+      <div class="container banner-inner">
+        <div class="quote-tile">
+          <div class="quote-content">
+            <span class="quote-mark">“</span>
+            <p class="quote-text">Дағдылар – бұл тек білім емес, бұл – мүмкіндіктерге апарар жол.</p>
+            <span class="quote-author">Skill to Income</span>
+          </div>
+        </div>
+
+        <div class="stats-items-row">
+          <div class="stat-unit" *ngFor="let stat of stats">
+            <div class="stat-val-group">
+              <span class="stat-num">{{ stat.value }}</span>
+              <div class="stars" *ngIf="stat.ratingStars">
+                <span *ngFor="let s of [1,2,3,4,5]">★</span>
+              </div>
+            </div>
+            <div class="stat-desc">{{ stat.label }}</div>
+          </div>
+        </div>
+
+        <div class="banner-cta">
+          <button class="btn btn-emerald-outline" (click)="openChat()">
+            <span>Қазір қосыл</span>
+            <svg viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </section>
+  </ng-container>
+
+
+  <!-- ==================== ЭКРАН 2: ИИ-ЧАТ (SKILL ANALYZER) ==================== -->
+  <div class="chat-fullscreen-view" *ngIf="showChat()">
+    <!-- Верхняя шапка чата -->
+    <header class="chat-header">
+      <div class="container chat-header-inner">
+        <div class="chat-header-left">
+          <button class="btn-back" (click)="closeChat()" title="Басты бетке оралу">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M19 12H5M12 19l-7-7 7-7" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span>Басты бет</span>
+          </button>
+          <div class="chat-agent-info">
+            <div class="ai-avatar-online">
+              <div class="ai-circle-badge">AI</div>
+              <span class="online-indicator"></span>
+            </div>
+            <div>
+              <h2 class="ai-name">Skill to Income AI Advisor</h2>
+              <span class="ai-status">Онлайн • Сенің жеке карьералық бағыттаушың</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Основная область сообщений -->
+    <main class="chat-body-container" #chatScrollContainer>
+      <div class="container chat-content-box">
+        
+        <!-- Быстрые чипы с популярными навыками -->
+        <div class="quick-chips-wrapper">
+          <span class="chips-label">Танымал дағдыларды таңдаңыз:</span>
+          <div class="chips-list">
+            <button 
+              class="skill-chip" 
+              *ngFor="let chip of quickSkills" 
+              (click)="selectSkillChip(chip)">
+              + {{ chip }}
+            </button>
+          </div>
+        </div>
+
+        <!-- Лента сообщений -->
+        <div class="messages-list">
+          <div 
+            *ngFor="let msg of chatMessages()" 
+            class="message-row"
+            [class.user-row]="msg.sender === 'user'"
+            [class.ai-row]="msg.sender === 'ai'">
+
+            <!-- Аватар для AI -->
+            <div class="msg-avatar" *ngIf="msg.sender === 'ai'">
+              <span>🤖</span>
+            </div>
+
+            <div class="msg-bubble">
+              <p class="msg-text">{{ msg.text }}</p>
+
+              <!-- Карточка с планом монетизации, если сгенерирована AI -->
+              <div class="ai-roadmap-card" *ngIf="msg.roadmap">
+                <div class="roadmap-header">
+                  <div class="rh-badge">Табыс болжамы:</div>
+                  <div class="rh-sum">{{ msg.roadmap.incomeEst }}</div>
+                </div>
+
+                <div class="roadmap-section">
+                  <div class="sec-label">Сәйкес келетін бағыттар:</div>
+                  <div class="role-tags">
+                    <span *ngFor="let role of msg.roadmap.roles" class="role-pill">
+                      {{ role }}
+                    </span>
+                  </div>
+                </div>
+
+                <div class="roadmap-section">
+                  <div class="sec-label">Алғашқы табысқа дейінгі 3 қадам:</div>
+                  <ol class="steps-ordered-list">
+                    <li *ngFor="let step of msg.roadmap.steps">{{ step }}</li>
+                  </ol>
+                </div>
+              </div>
+
+              <span class="msg-time">{{ msg.timestamp }}</span>
+            </div>
+          </div>
+
+          <!-- Индикатор набора текста AI -->
+          <div class="message-row ai-row" *ngIf="isAiTyping()">
+            <div class="msg-avatar"><span>🤖</span></div>
+            <div class="msg-bubble typing-bubble">
+              <span class="typing-dot"></span>
+              <span class="typing-dot"></span>
+              <span class="typing-dot"></span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </main>
+
+    <!-- Поле ввода сообщения внизу -->
+    <footer class="chat-footer">
+      <div class="container chat-footer-inner">
+        <form (ngSubmit)="sendCurrentMessage()" class="chat-form">
+          <input 
+            type="text" 
+            name="chatInput" 
+            [(ngModel)]="userInput" 
+            placeholder="Өз дағдыларыңды жаз (мысалы: Figma білемін, Python, ағылшын тілі...)" 
+            class="chat-input-field" 
+            autocomplete="off" />
+          
+          <button type="submit" class="chat-send-btn" [disabled]="!userInput().trim()">
+            <span>Талдау</span>
+            <svg viewBox="0 0 20 20" fill="currentColor" class="send-icon">
+              <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"/>
+            </svg>
+          </button>
+        </form>
+      </div>
+    </footer>
+  </div>
+
+</div>
